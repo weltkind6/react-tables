@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import {Button, Dropdown, DropdownItem, DropdownMenu, DropdownToggle} from "reactstrap";
+import {sortingUsers, isBlockedSorting} from "../../helpers/helpers";
 
 function App() {
     const [selectedUsers, setSelectedUsers] = useState(null);
@@ -60,33 +61,36 @@ function App() {
             });
     };
 
-    const sortingUsers = (sortKey) => {
-        setSortingToggle(!sortingToggle);
-        if (sortingToggle) {
-            users.sort((a, b) => a[sortKey].localeCompare(b[sortKey]));
-        } else {
-            users.sort((a, b) => b[sortKey].localeCompare(a[sortKey]));
-        }
-    }
-
-    const isBlockedSorting = () => {
-        setSortingToggle(!sortingToggle)
-        if (sortingToggle) {
-            users.sort((a, b) => a.isBlocked - b.isBlocked)
-        } else {
-            users.sort((a, b) => b.isBlocked - a.isBlocked)
-        }
-    }
+    // const sortingUsers = (sortKey) => {
+    //     setSortingToggle(!sortingToggle);
+    //     if (sortingToggle) {
+    //         users.sort((a, b) => a[sortKey].localeCompare(b[sortKey]));
+    //     } else {
+    //         users.sort((a, b) => b[sortKey].localeCompare(a[sortKey]));
+    //     }
+    // }
+    //
+    // const isBlockedSorting = () => {
+    //     setSortingToggle(!sortingToggle)
+    //     if (sortingToggle) {
+    //         users.sort((a, b) => a.isBlocked - b.isBlocked)
+    //     } else {
+    //         users.sort((a, b) => b.isBlocked - a.isBlocked)
+    //     }
+    // }
 
     return (
         <div className="App">
             <UserList
-                users={filteredUsers}
+                users={users}
+                filteredUsers={filteredUsers}
                 onUserSelect={handleUserSelect}
                 onDelete={handleUserDelete}
                 onSort={sortingUsers}
                 filteredHandler={handleFilter}
                 handleResetFilter={handleResetFilter}
+                setSortingToggle={setSortingToggle}
+                sortingToggle={sortingToggle}
                 isBlockedSorting={isBlockedSorting}
             />
             {selectedUsers &&
@@ -100,7 +104,18 @@ function App() {
 }
 
 function UserList(
-    {users, onUserSelect, onDelete, onSort, filteredHandler, handleResetFilter, isBlockedSorting}) {
+    {
+        users,
+        onUserSelect,
+        onDelete,
+        onSort,
+        filteredHandler,
+        handleResetFilter,
+        isBlockedSorting,
+        filteredUsers,
+        setSortingToggle,
+        sortingToggle
+    }) {
 
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const toggle = () => setDropdownOpen((prevState) => !prevState);
@@ -118,16 +133,39 @@ function UserList(
             <table>
                 <thead>
                 <tr>
-                    <th onClick={() => onSort('name')}>Имя</th>
-                    <th onClick={() => onSort('lastName')}>Фамилия</th>
-                    <th onClick={() => onSort('patronymic')}>Отчество</th>
-                    <th onClick={isBlockedSorting}>Заблокирован</th>
-                    <th onClick={() => onSort('regDate')}>Дата регистрации</th>
-                    <th onClick={() => onSort('lastSeen')}>Был в сети</th>
+                    <th onClick={() => onSort(users,'name', setSortingToggle, sortingToggle)}>Имя</th>
+                    <th onClick={() => onSort(users,'lastName', setSortingToggle, sortingToggle)}>Фамилия</th>
+                    <th onClick={() => onSort(users,'patronymic', setSortingToggle, sortingToggle)}>Отчество</th>
+                    <th onClick={() => onSort(users,'regDate', setSortingToggle, sortingToggle)}>Дата регистрации</th>
+                    <th onClick={() => onSort(users,'lastSeen', setSortingToggle, sortingToggle)}>Был в сети</th>
+                    <th onClick={() => isBlockedSorting(users, setSortingToggle, sortingToggle)}>Заблокирован</th>
                 </tr>
                 </thead>
                 <tbody>
-                {users.map(u => (
+                {filteredUsers.length === 0 ? users.map(u => (
+                    <tr key={u.id}>
+                        <td>{u.name}</td>
+                        <td>{u.lastName}</td>
+                        <td>{u.patronymic}</td>
+                        <td>{u.regDate}</td>
+                        <td>{u.lastSeen}</td>
+                        <td>{u.isBlocked ? "Заблокирован" : "Не заблокирован"}</td>
+                        <td>
+                            <Button
+                                onClick={() =>
+                                    onUserSelect(u)}>
+                                Редактировать
+                            </Button>
+                        </td>
+                        <td>
+                            <Button
+                                color="danger"
+                                onClick={() => onDelete(u)}>
+                                Удалить
+                            </Button>
+                        </td>
+                    </tr>
+                )) : filteredUsers.map(u => (
                     <tr key={u.id}>
                         <td>{u.name}</td>
                         <td>{u.lastName}</td>
