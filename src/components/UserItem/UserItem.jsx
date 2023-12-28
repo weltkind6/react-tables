@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import {Button, Dropdown, DropdownItem, DropdownMenu, DropdownToggle} from "reactstrap";;
 
 function App() {
     const [selectedUsers, setSelectedUsers] = useState(null);
@@ -53,8 +54,6 @@ function App() {
         }
     }
 
-
-
     return (
         <div className="App">
             <h1>Posts</h1>
@@ -63,6 +62,7 @@ function App() {
                 onUserSelect={handleUserSelect}
                 onDelete={handleUserDelete}
                 onSort={sortingUsers}
+
             />
             {selectedUsers &&
                 <UserForm
@@ -74,9 +74,22 @@ function App() {
     );
 }
 
-function UserList({ users, onUserSelect, onDelete, onSort }) {
+function UserList(
+    {users, onUserSelect, onDelete, onSort}) {
+
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+
+    const toggle = () => setDropdownOpen((prevState) => !prevState);
+
     return (
         <div>
+            <Dropdown isOpen={dropdownOpen} toggle={toggle} >
+                <DropdownToggle caret>Фильтрация</DropdownToggle>
+                <DropdownMenu>
+                    <DropdownItem header>По:</DropdownItem>
+                    <DropdownItem>Блокировке</DropdownItem>
+                </DropdownMenu>
+            </Dropdown>
             <table>
                 <thead>
                 <tr>
@@ -98,10 +111,18 @@ function UserList({ users, onUserSelect, onDelete, onSort }) {
                         <td>{u.regDate}</td>
                         <td>{u.lastSeen}</td>
                         <td>
-                            <button onClick={() => onUserSelect(u)}>Редактировать</button>
+                            <Button
+                                onClick={() =>
+                                    onUserSelect(u)}>
+                                Редактировать
+                            </Button>
                         </td>
                         <td>
-                            <button onClick={() => onDelete(u)}>Удалить</button>
+                            <Button
+                                color="danger"
+                                onClick={() => onDelete(u)}>
+                                Удалить
+                            </Button>
                         </td>
                     </tr>
                 ))}
