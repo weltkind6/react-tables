@@ -1,0 +1,31 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Анатолий",
+      "lastName": "Паровозов",
+      "patronymic": "Арсеньевич",
+      "isBlocked": "true",
+      "regDate": "10.11.1996",
+      "lastSeen": "yesterday at 03:45"
+    },
+    {
+      "id": 2,
+      "name": "Илья",
+      "lastName": "Ярославцев",
+      "patronymic": "Геннадьевич",
+      "isBlocked": "false",
+      "regDate": "30.04.1986",
+      "lastSeen": "today at 13:46"
+    },
+    {
+      "id": 3,
+      "name": "Спиридон",
+      "lastName": "Добрынин",
+      "patronymic": "Аркадьевич",
+      "isBlocked": "false",
+      "regDate": "01.01.1999",
+      "lastSeen": "today at 18:56"
+    }
+  ]
+}
