@@ -4,6 +4,7 @@ import axios from 'axios';
 function App() {
     const [selectedUsers, setSelectedUsers] = useState(null);
     const [users, setUsers] = useState([])
+    const [sortingToggle, setSortingToggle] = useState(false);
 
 
     useEffect(() => {
@@ -19,7 +20,7 @@ function App() {
     };
 
     const handleUserUpdate = (user) => {
-        axios.put(`https://jsonplaceholder.typicode.com/posts/${user.id}`, user)
+        axios.put(`http://localhost:3001/users/${user.id}`, user)
             .then(response => {
                 const updatedUsers = users.map(u => u.id === user.id? response.data : u);
                 setUsers(updatedUsers);
@@ -30,11 +31,39 @@ function App() {
             });
     };
 
+    const handleUserDelete = (user) => {
+        console.log('delete')
+        axios.delete(`http://localhost:3001/users/${user.id}`)
+            .then(response => {
+                const updatedUsers = users.filter(u => u.id!== user.id);
+                setUsers(updatedUsers);
+                setSelectedUsers(null);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    };
+
+    const sortingUsers = (sortKey) => {
+        setSortingToggle(!sortingToggle);
+        if (sortingToggle) {
+            users.sort((a, b) => a[sortKey].localeCompare(b[sortKey]));
+        } else {
+            users.sort((a, b) => b[sortKey].localeCompare(a[sortKey]));
+        }
+    }
+
+
 
     return (
         <div className="App">
             <h1>Posts</h1>
-            <UserList users={users} onUserSelect={handleUserSelect} />
+            <UserList
+                users={users}
+                onUserSelect={handleUserSelect}
+                onDelete={handleUserDelete}
+                onSort={sortingUsers}
+            />
             {selectedUsers &&
                 <UserForm
                     user={selectedUsers}
@@ -45,31 +74,34 @@ function App() {
     );
 }
 
-function UserList({ users, onUserSelect }) {
+function UserList({ users, onUserSelect, onDelete, onSort }) {
     return (
         <div>
             <table>
                 <thead>
                 <tr>
-                    <th>Имя</th>
-                    <th>Фамилия</th>
-                    <th>Отчество</th>
-                    <th>Заблокирован</th>
-                    <th>Дата регистрации</th>
-                    <th>Был в сети</th>
+                    <th onClick={() => onSort('name')}>Имя</th>
+                    <th onClick={() => onSort('lastName')}>Фамилия</th>
+                    <th onClick={() => onSort('patronymic')}>Отчество</th>
+                    <th onClick={() => onSort('isBlocked')}>Заблокирован</th>
+                    <th onClick={() => onSort('regDate')}>Дата регистрации</th>
+                    <th onClick={() => onSort('lastSeen')}>Был в сети</th>
                 </tr>
                 </thead>
                 <tbody>
-                {users.map(user => (
-                    <tr key={user.id}>
-                        <td>{user.name}</td>
-                        <td>{user.lastName}</td>
-                        <td>{user.patronymic}</td>
-                        <td>{user.isBlocked}</td>
-                        <td>{user.regDate}</td>
-                        <td>{user.lastSeen}</td>
+                {users.map(u => (
+                    <tr key={u.id}>
+                        <td>{u.name}</td>
+                        <td>{u.lastName}</td>
+                        <td>{u.patronymic}</td>
+                        <td>{u.isBlocked}</td>
+                        <td>{u.regDate}</td>
+                        <td>{u.lastSeen}</td>
                         <td>
-                            <button onClick={() => onUserSelect(user)}>Edit</button>
+                            <button onClick={() => onUserSelect(u)}>Редактировать</button>
+                        </td>
+                        <td>
+                            <button onClick={() => onDelete(u)}>Удалить</button>
                         </td>
                     </tr>
                 ))}
@@ -81,11 +113,23 @@ function UserList({ users, onUserSelect }) {
 
 function UserForm({ user, onSubmit, onClose }) {
     const [name, setName] = useState(user.name);
-    const [firstName, setFirstName] = useState(user.firstName);
+    const [lastName, setLastName] = useState(user.lastName);
+    const [patronymic, setPatronymic] = useState(user.patronymic);
+    const [isBlocked, setIsBlocked] = useState(user.isBlocked);
+    const [regDate, setRegDate] = useState(user.regDate);
+    const [lastSeen, setLastSeen] = useState(user.lastSeen);
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const updatedUser = {...user, name, firstName };
+        const updatedUser =
+            {...user,
+                name,
+                lastName,
+                patronymic,
+                isBlocked,
+                regDate,
+                lastSeen
+            };
         onSubmit(updatedUser);
         onClose();
     };
@@ -93,12 +137,28 @@ function UserForm({ user, onSubmit, onClose }) {
     return (
         <form onSubmit={handleSubmit}>
             <div>
-                <label htmlFor="title">Title:</label>
+                <label htmlFor="title">Имя:</label>
                 <input type="text" id="title" value={name} onChange={(e) => setName(e.target.value)} />
             </div>
             <div>
+                <label htmlFor="body">Фамилия:</label>
+                <textarea id="body" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+            </div>
+            <div>
                 <label htmlFor="body">Body:</label>
-                <textarea id="body" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+                <textarea id="body" value={patronymic} onChange={(e) => setPatronymic(e.target.value)} />
+            </div>
+            <div>
+                <label htmlFor="body">Body:</label>
+                <textarea id="body" value={isBlocked} onChange={(e) => setIsBlocked(e.target.value)} />
+            </div>
+            <div>
+                <label htmlFor="body">Body:</label>
+                <textarea id="body" value={regDate} onChange={(e) => setRegDate(e.target.value)} />
+            </div>
+            <div>
+                <label htmlFor="body">Body:</label>
+                <textarea id="body" value={lastSeen} onChange={(e) => setLastSeen(e.target.value)} />
             </div>
             <button type="submit">Save</button>
             <button type="button" onClick={onClose}>Cancel</button>
