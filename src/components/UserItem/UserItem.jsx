@@ -1,11 +1,22 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import {Button, Dropdown, DropdownItem, DropdownMenu, DropdownToggle} from "reactstrap";;
+import {Button, Dropdown, DropdownItem, DropdownMenu, DropdownToggle} from "reactstrap";
 
 function App() {
     const [selectedUsers, setSelectedUsers] = useState(null);
     const [users, setUsers] = useState([])
     const [sortingToggle, setSortingToggle] = useState(false);
+    const [filteredUsers, setFilteredUsers] = useState([])
+
+
+    const handleFilter = () => {
+        const filteredArr = users.filter(obj => obj.isBlocked === true);
+        setFilteredUsers(filteredArr);
+    }
+    const handleResetFilter = () => {
+        setFilteredUsers(users);
+    }
+
 
 
     useEffect(() => {
@@ -56,13 +67,13 @@ function App() {
 
     return (
         <div className="App">
-            <h1>Posts</h1>
             <UserList
-                users={users}
+                users={filteredUsers}
                 onUserSelect={handleUserSelect}
                 onDelete={handleUserDelete}
                 onSort={sortingUsers}
-
+                filteredHandler={handleFilter}
+                handleResetFilter={handleResetFilter}
             />
             {selectedUsers &&
                 <UserForm
@@ -75,19 +86,22 @@ function App() {
 }
 
 function UserList(
-    {users, onUserSelect, onDelete, onSort}) {
+    {users, onUserSelect, onDelete, onSort, filteredHandler, handleResetFilter}) {
+    console.log('resetFilter', handleResetFilter)
 
     const [dropdownOpen, setDropdownOpen] = useState(false);
-
     const toggle = () => setDropdownOpen((prevState) => !prevState);
 
     return (
         <div>
+            <button onClick={filteredHandler}>Filter</button>
+            <button>Reset</button>
             <Dropdown isOpen={dropdownOpen} toggle={toggle} >
                 <DropdownToggle caret>Фильтрация</DropdownToggle>
                 <DropdownMenu>
                     <DropdownItem header>По:</DropdownItem>
-                    <DropdownItem>Блокировке</DropdownItem>
+                    <DropdownItem onClick={handleResetFilter}>Сбросить фильтр</DropdownItem>
+                    <DropdownItem onClick={filteredHandler}>По блокировке</DropdownItem>
                 </DropdownMenu>
             </Dropdown>
             <table>
