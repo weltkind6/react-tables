@@ -23,7 +23,7 @@
       "name": "Илья11",
       "lastName": "Ярославцев222",
       "patronymic": "Геннадьевич333",
-      "isBlocked": false,
+      "isBlocked": true,
       "regDate": "30.04.1986",
       "lastSeen": "today at 13:46"
     },

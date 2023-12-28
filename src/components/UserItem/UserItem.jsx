@@ -7,8 +7,11 @@ function App() {
     const [users, setUsers] = useState([])
     const [sortingToggle, setSortingToggle] = useState(false);
     const [filteredUsers, setFilteredUsers] = useState([])
+    console.log('users', users)
 
-
+    useEffect(() => {
+        handleResetFilter()
+    }, [])
     const handleFilter = () => {
         const filteredArr = users.filter(obj => obj.isBlocked === true);
         setFilteredUsers(filteredArr);
@@ -30,6 +33,7 @@ function App() {
     const handleUserSelect = (user) => {
         setSelectedUsers(user);
     };
+
 
     const handleUserUpdate = (user) => {
         axios.put(`http://localhost:3001/users/${user.id}`, user)
@@ -65,6 +69,15 @@ function App() {
         }
     }
 
+    const isBlockedSorting = () => {
+        setSortingToggle(!sortingToggle)
+        if (sortingToggle) {
+            users.sort((a, b) => a.isBlocked - b.isBlocked)
+        } else {
+            users.sort((a, b) => b.isBlocked - a.isBlocked)
+        }
+    }
+
     return (
         <div className="App">
             <UserList
@@ -74,6 +87,7 @@ function App() {
                 onSort={sortingUsers}
                 filteredHandler={handleFilter}
                 handleResetFilter={handleResetFilter}
+                isBlockedSorting={isBlockedSorting}
             />
             {selectedUsers &&
                 <UserForm
@@ -86,16 +100,13 @@ function App() {
 }
 
 function UserList(
-    {users, onUserSelect, onDelete, onSort, filteredHandler, handleResetFilter}) {
-    console.log('resetFilter', handleResetFilter)
+    {users, onUserSelect, onDelete, onSort, filteredHandler, handleResetFilter, isBlockedSorting}) {
 
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const toggle = () => setDropdownOpen((prevState) => !prevState);
 
     return (
         <div>
-            <button onClick={filteredHandler}>Filter</button>
-            <button>Reset</button>
             <Dropdown isOpen={dropdownOpen} toggle={toggle} >
                 <DropdownToggle caret>Фильтрация</DropdownToggle>
                 <DropdownMenu>
@@ -110,7 +121,7 @@ function UserList(
                     <th onClick={() => onSort('name')}>Имя</th>
                     <th onClick={() => onSort('lastName')}>Фамилия</th>
                     <th onClick={() => onSort('patronymic')}>Отчество</th>
-                    <th onClick={() => onSort('isBlocked')}>Заблокирован</th>
+                    <th onClick={isBlockedSorting}>Заблокирован</th>
                     <th onClick={() => onSort('regDate')}>Дата регистрации</th>
                     <th onClick={() => onSort('lastSeen')}>Был в сети</th>
                 </tr>
@@ -121,7 +132,7 @@ function UserList(
                         <td>{u.name}</td>
                         <td>{u.lastName}</td>
                         <td>{u.patronymic}</td>
-                        <td>{u.isBlocked}</td>
+                        <td>{u.isBlocked ? "Заблокирован" : "Не заблокирован"}</td>
                         <td>{u.regDate}</td>
                         <td>{u.lastSeen}</td>
                         <td>
