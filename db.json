@@ -2,7 +2,7 @@
   "users": [
     {
       "id": 1,
-      "name": "Анатолий",
+      "name": "Анатолий112",
       "lastName": "Паровозов",
       "patronymic": "Арсеньевич",
       "isBlocked": true,
@@ -20,27 +20,58 @@
     },
     {
       "id": 3,
-      "name": "Илья11",
-      "lastName": "Ярославцев222",
-      "patronymic": "Геннадьевич333",
-      "isBlocked": true,
-      "regDate": "30.04.1986",
-      "lastSeen": "today at 13:46"
-    },
-    {
-      "id": 4,
-      "name": "Илья11",
-      "lastName": "Ярославцев222",
-      "patronymic": "Геннадьевич333",
+      "name": "Антон",
+      "lastName": "Ярославцев",
+      "patronymic": "Геннадьевич",
       "isBlocked": false,
       "regDate": "30.04.1986",
       "lastSeen": "today at 13:46"
     },
     {
+      "id": 4,
+      "name": "Василий",
+      "lastName": "Ярославцев",
+      "patronymic": "Геннадьевич",
+      "isBlocked": false,
+      "regDate": "30.04.1986",
+      "lastSeen": "today at 13:46"
+    }, {
       "id": 5,
-      "name": "Иля11",
-      "lastName": "Ярославцев222",
-      "patronymic": "Геннадьевич333",
+      "name": "Александр",
+      "lastName": "Ярославцев",
+      "patronymic": "Геннадьевич",
+      "isBlocked": false,
+      "regDate": "30.04.1986",
+      "lastSeen": "today at 13:46"
+    }, {
+      "id": 6,
+      "name": "Геннадий",
+      "lastName": "Ярославцев",
+      "patronymic": "Геннадьевич",
+      "isBlocked": false,
+      "regDate": "30.04.1986",
+      "lastSeen": "today at 13:46"
+    }, {
+      "id": 7,
+      "name": "Виталий",
+      "lastName": "Ярославцев",
+      "patronymic": "Геннадьевич",
+      "isBlocked": false,
+      "regDate": "30.04.1986",
+      "lastSeen": "today at 13:46"
+    }, {
+      "id": 8,
+      "name": "Алексей",
+      "lastName": "Ярославцев",
+      "patronymic": "Геннадьевич",
+      "isBlocked": false,
+      "regDate": "30.04.1986",
+      "lastSeen": "today at 13:46"
+    }, {
+      "id": 9,
+      "name": "Владислав",
+      "lastName": "Ярославцев",
+      "patronymic": "Геннадьевич",
       "isBlocked": false,
       "regDate": "30.04.1986",
       "lastSeen": "today at 13:46"
