@@ -56,7 +56,7 @@
       "name": "Виталий",
       "lastName": "Ярославцев",
       "patronymic": "Геннадьевич",
-      "isBlocked": false,
+      "isBlocked": true,
       "regDate": "30.04.1986",
       "lastSeen": "today at 13:46"
     }, {
@@ -72,7 +72,7 @@
       "name": "Владислав",
       "lastName": "Ярославцев",
       "patronymic": "Геннадьевич",
-      "isBlocked": false,
+      "isBlocked": true,
       "regDate": "30.04.1986",
       "lastSeen": "today at 13:46"
     }
