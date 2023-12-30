@@ -35,7 +35,8 @@
       "isBlocked": false,
       "regDate": "30.04.1986",
       "lastSeen": "today at 13:46"
-    }, {
+    },
+    {
       "id": 5,
       "name": "Александр",
       "lastName": "Ярославцев",
@@ -43,7 +44,8 @@
       "isBlocked": false,
       "regDate": "30.04.1986",
       "lastSeen": "today at 13:46"
-    }, {
+    },
+    {
       "id": 6,
       "name": "Геннадий",
       "lastName": "Ярославцев",
@@ -51,15 +53,8 @@
       "isBlocked": false,
       "regDate": "30.04.1986",
       "lastSeen": "today at 13:46"
-    }, {
-      "id": 7,
-      "name": "Виталий",
-      "lastName": "Ярославцев",
-      "patronymic": "Геннадьевич",
-      "isBlocked": true,
-      "regDate": "30.04.1986",
-      "lastSeen": "today at 13:46"
-    }, {
+    },
+    {
       "id": 8,
       "name": "Алексей",
       "lastName": "Ярославцев",
@@ -67,7 +62,8 @@
       "isBlocked": false,
       "regDate": "30.04.1986",
       "lastSeen": "today at 13:46"
-    }, {
+    },
+    {
       "id": 9,
       "name": "Владислав",
       "lastName": "Ярославцев",

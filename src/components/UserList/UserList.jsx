@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Button } from "reactstrap";
 import DropDown from "../../widgets/ui/DropDown/DropDown";
 import UserTable from "../../widgets/ui/Table/UserTable";
+import { MdDelete } from "react-icons/md";
+import { FaEdit } from "react-icons/fa";
 
 function UserList({
                       users,
@@ -28,19 +30,23 @@ function UserList({
                     <td>{u.regDate}</td>
                     <td>{u.lastSeen}</td>
                     <td>{u.isBlocked? "Заблокирован" : "Не заблокирован"}</td>
-                    <td>
-                        <Button
-                            color="warning"
-                            onClick={() => onUserSelect(u)}>
-                            Редактировать
-                        </Button>
+                    <td style={{width: '40px'}}>
+                        <FaEdit
+                            size={24}
+                            color="FFC107"
+                            onClick={() => onUserSelect(u)}
+                            cursor="pointer"
+                            title="Редактировать"
+                        />
                     </td>
                     <td>
-                        <Button
-                            color="danger"
-                            onClick={() => onDelete(u)}>
-                            Удалить
-                        </Button>
+                        <MdDelete
+                            size="33"
+                            onClick={() => onDelete(u)}
+                            cursor="pointer"
+                            color="ff5522"
+                            title="Удалить"
+                        />
                     </td>
                 </tr>
             ));
@@ -54,18 +60,21 @@ function UserList({
                     <td>{u.regDate}</td>
                     <td>{u.lastSeen}</td>
                     <td>
-                        <Button
-                            color="warning"
-                            onClick={() => onUserSelect(u)}>
-                            Редактировать
-                        </Button>
+                        <FaEdit
+                            size={24}
+                            color="FFC107"
+                            onClick={() => onUserSelect(u)}
+                            cursor="pointer"
+                            title="Редактировать"
+                        />
                     </td>
                     <td>
-                        <Button
-                            color="danger"
-                            onClick={() => onDelete(u)}>
-                            Удалить
-                        </Button>
+                        <MdDelete
+                            size={24}
+                            color="red"
+                            cursor="pointer"
+                            title="Удалить"
+                        />
                     </td>
                 </tr>
             ));
