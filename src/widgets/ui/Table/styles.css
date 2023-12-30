@@ -1,5 +1,7 @@
 .table {
    border: 1px solid lightgray;
+    z-index: 1;
+    position: relative;
 }
 
 th > span {

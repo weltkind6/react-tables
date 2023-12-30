@@ -6,6 +6,7 @@ import axios from 'axios';
 import {apiLink} from "../../shared/api";
 
 function App() {
+    const [isFormOpen, setIsFormOpen] = useState(false);
     const [selectedUsers, setSelectedUsers] = useState(null);
     const [users, setUsers] = useState([])
     const [sortingToggle, setSortingToggle] = useState(false);
@@ -28,6 +29,7 @@ function App() {
 
     const handleUserSelect = (user) => {
         setSelectedUsers(user);
+        setIsFormOpen(true)
     };
 
     const handleUserUpdate = (user) => {
@@ -70,6 +72,7 @@ function App() {
             />
             {selectedUsers &&
                 <EditUserForm
+                    isOpen={isFormOpen}
                     user={selectedUsers}
                     onSubmit={handleUserUpdate}
                     onClose={() => setSelectedUsers(null)}

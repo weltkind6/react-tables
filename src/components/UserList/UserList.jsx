@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Button } from "reactstrap";
 import DropDown from "../../widgets/ui/DropDown/DropDown";
 import UserTable from "../../widgets/ui/Table/UserTable";
 import { MdDelete } from "react-icons/md";

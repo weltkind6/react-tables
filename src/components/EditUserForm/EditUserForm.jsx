@@ -2,7 +2,7 @@ import {useState} from "react";
 import {Button, Input} from "reactstrap";
 import styles from './styles.module.css';
 
-function EditUserForm({ user, onSubmit, onClose }) {
+function EditUserForm({ user, onSubmit, onClose, isOpen }) {
     const [name, setName] = useState(user.name);
     const [lastName, setLastName] = useState(user.lastName);
     const [patronymic, setPatronymic] = useState(user.patronymic);
@@ -41,7 +41,11 @@ function EditUserForm({ user, onSubmit, onClose }) {
             </div>
             <div>
                 <label htmlFor="body" className={styles.label}>Заблокирован:</label>
-                <Input id="body" value={isBlocked} onChange={(e) => setIsBlocked(e.target.value)} />
+                <Input
+                    id="body"
+                    value={isBlocked ? "Заблокирован" : "Не заблокирован"}
+                    onChange={(e) => setIsBlocked(e.target.value)}
+                />
             </div>
             <div>
                 <label htmlFor="body" className={styles.label}>Дата регистрации:</label>
