@@ -28,7 +28,9 @@ function UserList({
                     <td>{u.patronymic}</td>
                     <td>{u.regDate}</td>
                     <td>{u.lastSeen}</td>
-                    <td>{u.isBlocked? "Заблокирован" : "Не заблокирован"}</td>
+                    <td>
+                        {u.isBlocked? "Заблокирован" : "Не заблокирован"}
+                    </td>
                     <td style={{width: '40px'}}>
                         <FaEdit
                             size={24}

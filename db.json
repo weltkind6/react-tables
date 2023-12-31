@@ -56,19 +56,10 @@
     },
     {
       "id": 8,
-      "name": "Алексей",
+      "name": "Алексе123",
       "lastName": "Ярославцев",
       "patronymic": "Геннадьевич",
       "isBlocked": false,
-      "regDate": "30.04.1986",
-      "lastSeen": "today at 13:46"
-    },
-    {
-      "id": 9,
-      "name": "Владислав",
-      "lastName": "Ярославцев",
-      "patronymic": "Геннадьевич",
-      "isBlocked": true,
       "regDate": "30.04.1986",
       "lastSeen": "today at 13:46"
     }
