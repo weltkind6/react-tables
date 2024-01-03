@@ -24,9 +24,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "server": "json-server --watch db.json -p 3001",
-    "dev": "concurrently \"npm run server\"  \"npm start\"",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "dev": "concurrently \"npm run server\"  \"npm start\""
   },
   "eslintConfig": {
     "extends": [

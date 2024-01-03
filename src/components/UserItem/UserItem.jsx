@@ -11,6 +11,7 @@ function App() {
     const [users, setUsers] = useState([])
     const [sortingToggle, setSortingToggle] = useState(false);
     const [filteredUsers, setFilteredUsers] = useState([])
+    console.log('users', users)
     const handleFilter = () => {
         const filteredArr = users.filter(obj => obj.isBlocked === true);
         setFilteredUsers(filteredArr);
