@@ -1,6 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {Button, FormGroup, Input, Label} from "reactstrap";
+import "react-datepicker/dist/react-datepicker.css";
 import styles from './styles.module.css';
+import {DatePicker} from "reactstrap-date-picker";
+import moment from "moment";
 
 const Modal = ({active, setActive, onClose, onSubmit, user}) => {
     const [name, setName] = useState(user.name);
@@ -9,6 +12,18 @@ const Modal = ({active, setActive, onClose, onSubmit, user}) => {
     const [isBlocked, setIsBlocked] = useState(user.isBlocked);
     const [regDate, setRegDate] = useState(user.regDate);
     const [lastSeen, setLastSeen] = useState(user.lastSeen);
+    const [value, setValue]= useState(new Date().toISOString())
+
+    const date = moment.utc(value);
+    const formattedDate = date.format("DD.MM.YYYY");
+
+    const dateToEdit = moment(regDate, "DD.MM.YYYY");
+    const formattedDateToIso = dateToEdit.toISOString();
+
+    function handleChange (value) {
+        setValue(value)
+    }
+
 
     useEffect(() => {
         if (user) {
@@ -32,7 +47,7 @@ const Modal = ({active, setActive, onClose, onSubmit, user}) => {
                 lastName,
                 patronymic,
                 isBlocked,
-                regDate,
+                regDate: formattedDate,
                 lastSeen
             };
         onSubmit(updatedUser);
@@ -104,10 +119,9 @@ const Modal = ({active, setActive, onClose, onSubmit, user}) => {
                         htmlFor="body"
                         className={styles.label}>Дата регистрации:
                     </label>
-                    <Input
-                        id="body"
-                        value={regDate}
-                        onChange={(e) => setRegDate(e.target.value)}
+                    <DatePicker
+                        value={formattedDateToIso}
+                        onChange= {(v,f) => handleChange(v, f)}
                     />
                 </div>
                 <div>
