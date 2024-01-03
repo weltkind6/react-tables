@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import {useState, useEffect} from 'react';
 import {sortingUsers, isBlockedSorting} from "../../helpers/helpers";
-import EditUserForm from "../EditUserForm/EditUserForm";
 import UserList from "../UserList/UserList";
 import axios from 'axios';
 import {apiLink} from "../../shared/api";
+import Modal from "../../shared/ui/Modal/Modal";
 
 function App() {
     const [isFormOpen, setIsFormOpen] = useState(false);
@@ -11,7 +11,6 @@ function App() {
     const [users, setUsers] = useState([])
     const [sortingToggle, setSortingToggle] = useState(false);
     const [filteredUsers, setFilteredUsers] = useState([])
-    console.log('users', users)
     const handleFilter = () => {
         const filteredArr = users.filter(obj => obj.isBlocked === true);
         setFilteredUsers(filteredArr);
@@ -29,14 +28,14 @@ function App() {
     }, [])
 
     const handleUserSelect = (user) => {
-        setSelectedUsers(user);
         setIsFormOpen(true)
+        setSelectedUsers(user);
     };
 
     const handleUserUpdate = (user) => {
         axios.put(`${apiLink}/${user.id}`, user)
             .then(response => {
-                const updatedUsers = users.map(u => u.id === user.id? response.data : u);
+                const updatedUsers = users.map(u => u.id === user.id ? response.data : u);
                 setUsers(updatedUsers);
                 setSelectedUsers(null);
             })
@@ -48,7 +47,7 @@ function App() {
     const handleUserDelete = (user) => {
         axios.delete(`${apiLink}/${user.id}`)
             .then(response => {
-                const updatedUsers = users.filter(u => u.id!== user.id);
+                const updatedUsers = users.filter(u => u.id !== user.id);
                 setUsers(updatedUsers);
                 setSelectedUsers(null);
             })
@@ -72,10 +71,12 @@ function App() {
                 isBlockedSorting={isBlockedSorting}
             />
             {selectedUsers &&
-                <EditUserForm
-                    isOpen={isFormOpen}
-                    user={selectedUsers}
+                <Modal
+                    active={isFormOpen}
+                    setActive={setIsFormOpen}
+                    children="Редактировать"
                     onSubmit={handleUserUpdate}
+                    user={selectedUsers}
                     onClose={() => setSelectedUsers(null)}
                 />}
         </div>
