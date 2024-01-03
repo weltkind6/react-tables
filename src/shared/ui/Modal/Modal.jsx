@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {Button, Input} from "reactstrap";
+import React, {useEffect, useState} from 'react';
+import {Button, FormGroup, Input, Label} from "reactstrap";
 import styles from './styles.module.css';
 
 const Modal = ({active, setActive, onClose, onSubmit, user}) => {
@@ -9,6 +9,19 @@ const Modal = ({active, setActive, onClose, onSubmit, user}) => {
     const [isBlocked, setIsBlocked] = useState(user.isBlocked);
     const [regDate, setRegDate] = useState(user.regDate);
     const [lastSeen, setLastSeen] = useState(user.lastSeen);
+
+    useEffect(() => {
+        if (user) {
+            setName(user.name);
+            setLastName(user.lastName);
+            setPatronymic(user.patronymic);
+            setIsBlocked(user.isBlocked);
+            setRegDate(user.regDate);
+            setLastSeen(user.lastSeen);
+        }
+    }, [user]);
+
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -68,17 +81,24 @@ const Modal = ({active, setActive, onClose, onSubmit, user}) => {
                         onChange={(e) => setPatronymic(e.target.value)}
                     />
                 </div>
-                <div>
-                    <label
-                        htmlFor="body"
-                        className={styles.label}>Заблокирован:
-                    </label>
+                <FormGroup>
+                    <Label for="exampleSelect" className={styles.label}>
+                        Заблокирован
+                    </Label>
                     <Input
-                        id="body"
-                        value={isBlocked ? "Заблокирован" : "Не заблокирован"}
-                        onChange={(e) => setIsBlocked(e.target.value)}
-                    />
-                </div>
+                        id="exampleSelect"
+                        name="select"
+                        type="select"
+                        onChange={(e) => setIsBlocked(e.target.value === "Заблокирован")}
+                    >
+                        <option>
+                            {isBlocked ? "Заблокирован" : "Не заблокирован"}
+                        </option>
+                        <option>
+                            {isBlocked ? "Не заблокирован" : "Заблокирован"}
+                        </option>
+                    </Input>
+                </FormGroup>
                 <div>
                     <label
                         htmlFor="body"

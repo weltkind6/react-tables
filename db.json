@@ -20,7 +20,7 @@
     },
     {
       "id": 3,
-      "name": "Антон",
+      "name": "Александр222",
       "lastName": "Ярославцев",
       "patronymic": "Геннадьевич",
       "isBlocked": false,
@@ -50,7 +50,7 @@
       "name": "Геннадий",
       "lastName": "Ярославцев",
       "patronymic": "Геннадьевич",
-      "isBlocked": false,
+      "isBlocked": true,
       "regDate": "30.04.1986",
       "lastSeen": "today at 13:46"
     }

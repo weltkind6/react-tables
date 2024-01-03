@@ -11,6 +11,7 @@ function App() {
     const [users, setUsers] = useState([])
     const [sortingToggle, setSortingToggle] = useState(false);
     const [filteredUsers, setFilteredUsers] = useState([])
+
     const handleFilter = () => {
         const filteredArr = users.filter(obj => obj.isBlocked === true);
         setFilteredUsers(filteredArr);
@@ -18,7 +19,6 @@ function App() {
     const handleResetFilter = () => {
         setFilteredUsers(users);
     }
-
     useEffect(() => {
         axios.get(apiLink)
             .then(response => setUsers(response.data))
@@ -43,6 +43,7 @@ function App() {
                 console.error(error);
             });
     };
+
 
     const handleUserDelete = (user) => {
         axios.delete(`${apiLink}/${user.id}`)
