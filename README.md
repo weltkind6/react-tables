@@ -8,3 +8,7 @@ Open [http://localhost:3000](http://localhost:3000) для запуска про
 Open [http://localhost:3001](http://localhost:3001) для запуска локального JSON сервера.
 
 http://localhost:3001/users - Список доступных пользователей.
+
+### `Если данные не загрузились`
+
+Выполнить установку JSON server глобально: npm install -g json-server
