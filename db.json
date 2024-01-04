@@ -2,11 +2,11 @@
   "users": [
     {
       "id": 1,
-      "name": "Анатолий112",
+      "name": "Анатолий ВАссерман",
       "lastName": "Паровозов",
       "patronymic": "Арсеньевич",
       "isBlocked": true,
-      "regDate": "04.04.1994",
+      "regDate": "04.01.2024",
       "lastSeen": "yesterday at 03:45"
     },
     {
@@ -31,9 +31,9 @@
       "id": 4,
       "name": "Василий",
       "lastName": "Ярославцев",
-      "patronymic": "Геннадьевич",
+      "patronymic": "Генич",
       "isBlocked": false,
-      "regDate": "16.02.2021",
+      "regDate": "04.01.2024",
       "lastSeen": "today at 13:46"
     },
     {
