@@ -137,13 +137,14 @@ const Modal = ({active, setActive, onClose, onSubmit, user}) => {
                 </div>
                 <div className={styles.btnBlock}>
                     <Button
+                        className={styles.okBtn}
                         color="success"
                         type="submit">
                         Сохранить
                     </Button>
                     <Button
-                        onClick={onClose}
                         className={styles.cancelBtn}
+                        onClick={onClose}
                         color="danger"
                         type="button">
                         Отмена

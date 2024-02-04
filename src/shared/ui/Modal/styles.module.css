@@ -38,6 +38,10 @@
     margin-left: 15px;
 }
 
+.okBtn, .cancelBtn {
+    cursor: pointer;
+}
+
 .label {
     font-weight: bold;
     margin: 10px 0 10px 0;

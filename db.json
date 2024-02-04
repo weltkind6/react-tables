@@ -2,7 +2,7 @@
   "users": [
     {
       "id": 1,
-      "name": "Анатолий ВАссерман",
+      "name": "Анатолий Вассерман",
       "lastName": "Паровозов",
       "patronymic": "Арсеньевич",
       "isBlocked": true,
